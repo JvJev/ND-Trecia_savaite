@@ -1,0 +1,320 @@
+ console.groupCollapsed('2.1. Sukurkite funkciją "getMinMax" kuri priima skaičių masyvą ir grąžina dviejų vietų tipų rinkinį. Pirmas grąžinamo rinkinio elementas - mažiausias skaičių masyvas, antras - didžiausias');
+  {
+
+    const getMinMax = (numbers: number[]): [number, number] => {
+        const sortedNumbers = [...numbers].sort((a, b) => a - b); 
+        //kodel reikia rasyti [...numbers] ir netinka ...numbers (meta klaida)
+        console.log(...numbers)
+        const [min] = sortedNumbers;
+        //console.log(min) Is kur atsiranda min? nes mes issisort'inom skaicius, bet kaip paimame maziausia?
+
+        const max = sortedNumbers[sortedNumbers.length - 1];
+        //console.log(max) kodel gauname didziausia skaiciu nors imame masyvo ilgi -1?
+        return [min, max];
+      };
+  
+      console.table({
+        'getMinMax[1, 7, -9, 5, 123]': getMinMax([1, 7, -9, 5, 123]),
+        'getMinMax[7, 7, 4, 7, 8, 2, 7, 7]': getMinMax([7, 7, 4, 7, 8, 2, 7, 7]),
+        'getMinMax[1, 2, 3, 4, 5, 6, 9, -7, -11, 2]': getMinMax([1, 2, 3, 4, 5, 6, 9, -7, -11, 2]),
+      });
+
+console.log('man pavykes sprendimas')
+
+const elMasivo = [12, 666, 78, -4,-65, 2, 18]
+console.log(elMasivo)
+const getMinMaxValues = (nums: number[]) => {
+    let minimal:number[] = nums.sort((a, b) => a - b )
+    console.log(minimal[0])
+    let maximal:number[] = nums.sort((a, b) => b - a )
+    console.log(maximal[0])
+};
+console.log(getMinMaxValues(elMasivo))
+
+
+  }
+  console.groupEnd();
+
+
+
+------------------------------------------------------------------------------
+
+
+
+
+
+  console.groupCollapsed('2.2 Sukurkite funkciją "calcDistance", kuri pagal 2 taškus (Coordinate2D), suskaičiuotų atstumą tarp taškų');
+  {
+
+    type Coordinate2D = [number, number];
+
+    const calcDistance = (p1: Coordinate2D, p2: Coordinate2D) => {
+      const [x1, y1] = p1;
+      const [x2, y2] = p2;
+      //susivedam koordinates
+      const deltaX = Math.abs(x1 - x2);
+      const deltaY = Math.abs(y1 - y2);
+      // kas yra delta?
+      const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
+      //cia atstumo skaiciavimo formule, deja siam uzdaviniui man reikia mokytis ne tik programuoti bet ir matematikos
+
+      return distance;
+    };
+    console.log('Uzduotis neatlikta, kopijuota susirasyti klausimus ir aiskintis sprendima: Sikart suprantu sprendima, bet nesuprantu matematinio atstumo skaiciavimo principo tarp dvieju tasku.')
+    console.table({
+      'calcDistance([0, 0], [3, 4])': calcDistance([0, 0], [3, 4]),
+      'calcDistance([1, 1], [7, 9])': calcDistance([1, 1], [7, 9]),
+      'calcDistance([-2, 3], [13, 11])': calcDistance([-2, 3], [13, 11]),
+    });
+
+  }
+  console.groupEnd();
+}
+console.groupEnd();
+
+
+------------------------------------------------------------------------------------
+
+console.groupCollapsed('3.1 Parašykite kodą, kuris parsiųstų skelbimus pasiekiamus šiuo adresu: "https://jsonplaceholder.typicode.com/posts?userId=1". Parsiųstus duomenis įrašykite į kintamajį "posts", darant parsiųstų duomenų tipo prielaidą. Prieš parsiunčiant duomenis apsirašykite "Post" tipą.');
+  {
+    type Post = { 
+        userId: number, 
+        id: number, 
+        title: string,
+        body: string,
+    };
+
+    let posts: Post[];
+
+    fetch('https://jsonplaceholder.typicode.com/posts?userId=1')
+    .then(response => response.json())
+    .then(((postData) => {
+        posts = postData as Post[];
+        console.log('3.1 Užduoties rezultatas - Post[]');
+        console.log(' vel tas pats, suprantu kaip veikia, bet paini sintakse, todel reikia daryti pagal destytojo pavyzdi')
+
+        console.table(posts);
+        console.log(' pats nesugalvojau sukurti: let posts: Post[]; ')
+
+      }));
+
+
+
+  }
+  console.groupEnd();
+
+------------------------------------------------------------------------------
+
+
+   console.groupCollapsed('4.1 Sukurkite objektą saugoti produktams, Product, pagal kategorijas: "food", "clothes" ir "other". "products" objektas turi 3 savybės pagal kategorijų pavadinimus, kurių reikšmės - Product[]. Sukūrus ir tipais aprašius "products" struktūrą, sukurkite funkciją "addProduct", kuri pridės produktą pagal kategoriją į "products" objektą. Ši funkcija turi priimti 2 parametrus: 1 - produktas, 2 - kategorijos pavadinimas. Kategorijos pavadinimas turi būti konkretus string tipas, pagal galimas produktų objekto kategorijas. Produkto tipą apsirašykite laisvai.');
+  {
+    type Category = 'Food'| 'Clothes'|'Other';
+    
+    type Product = {
+        color: string,
+        cost: number,
+        warranty: string,
+    };
+    // kodel cia type, ne const/let?
+    type Products = {
+        Food: Product[],
+      Clothes: Product[],
+      Other: Product[],
+    };
+    // kodel cia savybese reikia rasyti Product, 2) kodel Product su [] 
+    const products: Products = {
+        Food: [],
+        Clothes: [],
+        Other: [],
+      };
+  
+      const addProduct = (product: Product, category: Category) => {
+        products[category].push(product);
+      };
+      console.log('VISAS UZDAVINYS DARYTAS PAGAL ZILVINO PVZ, PAINUS VEIKIMO PRINCIPAS TAD SUNKU SUFORMULUOTI KONKRETU KLAUSIMA')
+      console.log("addProduct({ id: '1', title: 'Cepelinai', price: 0.89 }, 'Food');");
+      addProduct({ color: '1', cost: 5, warranty: 'No warranty' }, 'Food');
+      console.log("addProduct({ id: '2', title: 'Duona', price: 1.19 }, 'Food');");
+      addProduct({ color: '2', cost: 6, warranty: 'No warranty' }, 'Food');
+      console.log("addProduct({ id: '3', title: 'Kovine Van'Damke', price: 35.99 }, 'clothes');");
+      addProduct({ color: '3', cost: 39, warranty: 'Two days' }, 'Clothes');
+      console.log("addProduct({ id: '4', title: 'Adidas 3 paloskiu treningai', price: 19.99 }, 'clothes');");
+      addProduct({ color: '4', cost: 0.99, warranty: '12 months' }, 'Clothes');
+      console.log("addProduct({ id: '5', title: 'Katinas', price: 17.99 }, 'other');");
+      addProduct({ color: '5', cost: 55, warranty: 'No warranty' }, 'Other');
+  
+      console.log(products);
+
+  }
+  console.groupEnd();
+}
+console.groupEnd();
+
+
+
+==========================================================tipu aprasymas
+
+
+
+
+  console.group('6. Parašykite funkciją, kuri atspausdina kiekvieno masyvo elemento indeksus vienoje eilutėje: 0 1 2 3 ...');
+  {
+
+    const array1: string[] = ['uno', 'dos', 'tres', 'quatro','five'];
+    const res = array1.map((_, i) => i).join(' ');
+    console.log(res);
+
+
+          console.log('nesuprantu kaip veikia _, i ; paciam nepavyko padaryti')
+
+    
+
+    // Užduoties sprendimas ir užduoties sprendimo atspausdinimas su duomenimis
+  }
+  console.groupEnd();
+
+
+
+
+-------------------------------------------------------------------
+
+
+
+  console.groupCollapsed('2. Sukurkite funkciją, kuri grąžina pirmo ir antro parametro bendrą simbolių skaičių');
+{
+  
+
+// type aprasymas = (x:number, y:number) => number;
+// const rezultatas:aprasymas = function (x, y) {x + y} ;
+// rezultatas.length
+// const x:number = 9;
+//   const y:number = 118;
+// console.log(rezultatas(x, y))
+
+// const rezultatoIlgis:number = (rezultatas.length);
+
+// console.log(rezultatoIlgis(x1,y2))
+
+
+const ilgis = (x:string, y:string) : number => x.length + y.length;
+const x:string = 'vienas';
+const y:string = 'du';
+console.log(ilgis(x,y))
+
+}
+
+console.groupEnd();
+
+
+
+
+----------------------------------------------------------------------------------
+
+
+
+console.groupCollapsed('5. Sukurkite funkciją, kuri grąžina balsių kiekį žodyje');
+{
+  //nepavyko, netinkama buna pasirinkau
+// const kiekBalsiu:string[] = (zodis:string, searchValue:string[]) : string => zodis.includes(searchValue): 
+// const zodis:string = 'vienas';
+// const searchValue:string = [a, e,y,u,i,o];
+// console.log(kiekBalsiu(zodis,searchValue))
+
+
+// kazkas veikia bet grazina nesamones
+const kiekBalsiu = (zodis:string, balsiuSarasas:string[]) => {
+  let result:number = 0;
+      balsiuSarasas.map((balse) => {
+        if(zodis.includes(balse)) 
+        {
+        result = result +=1
+
+        }
+        console.log(result)
+     }
+    )
+  };
+  const a:string = 'pomidoriene';
+  const b:string[] = ['a', 'e', 'y', 'u', 'i', 'o'];
+  console.log(kiekBalsiu(a, b))
+  console.log('kazkas veikia bet grazina nesamones, bandziau toje pacioje funkcijoje naudoti string ir string[] = TS neleido. Isseko idejos. Kaip padaryti be zodyno metodo?')
+
+//vel nepavyko
+//   (let i = 0; i < zodis.length; i += 1) {
+//     if (zodis.includes(balsiuSarasas)){
+//       result + 1
+//     }
+//     return result;
+//   }
+//   const a:string = 'pomidoriene';
+//   const b:string[] = ['a', 'e', 'y', 'u', 'i', 'o'];
+
+// console.log(kiekBalsiu(a, b));
+// console.log(result)
+
+// }
+
+//-------------------------------------------------------------------
+// nepavyko
+// const kiekBalsiu = (zodis:string, balsiuSarasas:string[]) => {
+//   let result = 0;
+//   for (let i = 0; i < zodis.length; i += 1) {
+//     if (zodis.includes(balsiuSarasas)){
+//       result + 1
+//     }
+//     return result;
+//   }
+//   const a:string = 'pomidoriene';
+//   const b:string[] = ['a', 'e', 'y', 'u', 'i', 'o'];
+
+// console.log(kiekBalsiu(a, b));
+// console.log(result)
+// }
+
+
+// const countVowels = (str: string): number => {
+  //   let count = 0;
+  //   for (let i = 0; i < str.length; i += 1) {
+  //     if (VOWEL_REGEX.test(str[i])) {
+  //       count += 1;
+  //     }
+  //   }
+
+  //   return count;
+  // };
+
+  // const arg1 = 'labas';
+  // const arg2 = 'visogero';
+  // const arg3 = 'man patinka bananai';
+
+  // console.table({
+  //   [`countVowels(${arg1})`]: countVowels(arg1),
+  //   [`countVowels(${arg2})`]: countVowels(arg2),
+  //   [`countVowels(${arg3})`]: countVowels(arg3),
+  //   empty: undefined,
+  // });
+
+}
+
+console.groupEnd();
+
+
+
+
+
+
+---------------------------------------
+
+console.groupCollapsed('8. Sukurkite funkciją, kuri pirmu parametru priimtų žodį, o antruoju - masyvą su raidėmis.');
+{
+const xxx = (a:string, b:string[]) => {
+ const newArray = b.push(a)
+ console.log(newArray)
+ return newArray
+}
+const word = 'kompotas';
+const array = ['O', 'M', 'G'];
+xxx(word,array)
+console.log('nesuprantu kodel grazina 4')
+}
+console.groupEnd();
